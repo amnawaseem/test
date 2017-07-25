@@ -1,0 +1,1 @@
+PLAT_CSRC := multicore.c

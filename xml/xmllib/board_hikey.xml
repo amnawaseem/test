@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board id="hikey">
+  <device id="serial" base="0xf7113000" size="0x1000" />
+  <device id="irqc" base="0xf6800000" size="0x8000" />
+  <device id="gpio03" base="0xf8011000" size="0x4000" />
+  <device id="gpio4j" base="0xf7020000" size="0x10000" />
+  <device id="timers" base="0xf8008000" size="0x9000" />
+  <device id="thermal" base="0xf7030000" size="0x2000" />
+  <device id="CATCHALL" base="0xf0000000" size="0x0fff0000" />
+  <memory id="dram" base="0x00000000" size="0x80000000" />
+  <memory id="sram" base="0xfff80000" size="0x12000" />
+</board>

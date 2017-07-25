@@ -1,0 +1,2 @@
+PLAT_CSRC := interrupts.c multicore.c
+PLAT_SSRC := smc_handler.S

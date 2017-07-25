@@ -1,0 +1,17 @@
+WORDSIZE := 32
+
+ARCH_CFLAGS := 
+
+ARCH_CSRC := vm.c hypercall.c cpu_ops.c
+ARCH_CSRC += emulate/vtlb-pager.c emulate/vtlb-walker.c emulate/instructions.c emulate/coprocessor.c
+ARCH_SSRC := abort.S fpu_support.S vbar.S interrupt.S secure.S lock.S upcall.S cpu_state.S undefined.S supervisorcall.S
+
+ifeq ($(FEATURE_AS_MMU),yes)
+ARCH_SSRC += init.S
+ARCH_CFLAGS += -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard
+endif
+
+ifeq ($(FEATURE_AS_MPU),yes)
+ARCH_SSRC += init_mpu.S
+ARCH_CFLAGS += -mcpu=cortex-r7 -mfpu=vfpv3-d16
+endif

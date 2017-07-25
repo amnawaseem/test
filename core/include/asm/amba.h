@@ -1,0 +1,13 @@
+#ifndef _PHIDIAS_ASM_AMBA_H_
+#define _PHIDIAS_ASM_AMBA_H_
+
+#define	AMBA_PERIPHID0		0xfe0
+#define	AMBA_PERIPHID1		0xfe4
+#define	AMBA_PERIPHID2		0xfe8
+#define	AMBA_PERIPHID3		0xfec
+#define	AMBA_PRIMECELLID0	0xff0
+#define	AMBA_PRIMECELLID1	0xff4
+#define	AMBA_PRIMECELLID2	0xff8
+#define	AMBA_PRIMECELLID3	0xffc
+
+#endif

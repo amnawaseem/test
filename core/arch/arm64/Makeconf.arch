@@ -1,0 +1,14 @@
+WORDSIZE := 64
+
+ARCH_CFLAGS := -mcpu=cortex-a53
+
+ARCH_CSRC := cpu_ops.c vm.c trap.c
+ARCH_CSRC += $(if $(EMULATE_VTLB),emulate/vtlb-pager.c emulate/vtlb-walker.c)
+ARCH_CSRC += emulate/instructions.c
+
+ARCH_SSRC := fpu_support.S init.S lock.S upcall.S vbar.S
+ifeq ($(FEATURE_LIGHTWEIGHT_VCPU),y)
+ARCH_SSRC += cpu_state_lightweight.S
+else
+ARCH_SSRC += cpu_state.S
+endif

@@ -1,0 +1,6 @@
+WORDSIZE := 32
+
+ARCH_CFLAGS :=
+
+ARCH_CSRC := cpu_ops.c vm.c emulate/instructions.c exceptions.c tlb.c hypercall.c
+ARCH_SSRC := lock.S fpu_support.S cpu_state.S upcall.S init.S exception.S

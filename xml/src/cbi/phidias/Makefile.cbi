@@ -1,0 +1,16 @@
+TARGETS += precompilation_phidias generate_config_phidias
+CLEAN_CBI_PATTERN := precompilation_phidias generate_config_phidias
+
+precompilation_phidias: src/cbi/phidias/precompilation.c $(LIBSCHISM)
+	gcc $< $(CFLAGS) $(LIBSCHISM) -lxml2 -o $@
+
+GC_SRC := $(wildcard src/cbi/phidias/generate_config/*.c)
+GC_HDR := $(wildcard src/cbi/phidias/generate_config/*.h)
+GC_OBJ := $(patsubst %.c,%.o,$(GC_SRC))
+CLEAN_CBI_PATTERN += $(GC_OBJ)
+
+generate_config_phidias: $(GC_OBJ) $(LIBSCHISM)
+	gcc $(GC_OBJ) $(CFLAGS) $(LIBSCHISM) -lxml2 -o $@
+
+$(GC_OBJ): %.o: %.c $(GC_HDR) $(LIBSCHISM)
+	gcc $< $(CFLAGS) -c -o $@

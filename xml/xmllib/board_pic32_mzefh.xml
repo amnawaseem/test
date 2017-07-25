@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<board id="pic32_mzefh">
+	<memory id="dram"					base="0xA0000000" size="0x80000" />
+	<device id="sfrs"					base="0xBF800000" size="0x100000" />
+	<device id="irq_pic32"		base="0xBF810000" size="0x1000" />
+	<device id="timer_pic32"	base="0xBF840000" size="0x2000" />
+	<device id="serial"				base="0xBF822600" size="0x200" />
+</board>

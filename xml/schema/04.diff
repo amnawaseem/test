@@ -1,0 +1,11 @@
+--- schema/03.xsd	2017-06-10 04:14:32.581017171 +0200
++++ schema/04.xsd	2017-06-10 04:13:41.209018985 +0200
+@@ -113,7 +113,7 @@
+   </xsd:complexType>
+   <xsd:complexType name="t_memreq">
+     <xsd:attribute name="id" type="xsd:string" use="required" />
+-    <xsd:attribute name="base" type="dict_number_hex" />
++    <xsd:attribute name="base" type="dict_number_hex" use="required" />
+     <xsd:attribute name="size" type="number_hex" use="required" />
+     <xsd:attribute name="align_shift" type="number" />
+     <xsd:attribute name="cpumap" type="list_number" />

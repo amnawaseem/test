@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arch id="mips">
+	<paging_format id="mips" va_width="32" pa_width="32" size_estimate="0x0" >
+		<level leaf_base="0x1" shift="6" width="20" bpe="4" align="12">
+			<flag name="g" value_set="0x1"		value_clear="0x0" />
+			<flag name="r" value_set="0x80000000"	value_clear="0x0" />
+			<flag name="x" value_set="0x40000000"	value_clear="0x0" />
+			<flag name="w" value_set="0x4"		value_clear="0x0" />
+		</level>
+	</paging_format>
+</arch>

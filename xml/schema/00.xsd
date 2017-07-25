@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="scenario" type="t_scenario" />
+
+  <xsd:complexType name="t_scenario">
+    <xsd:sequence>
+      <xsd:element name="platform" type="t_platform" />
+      <xsd:element name="hypervisor" type="t_hypervisor" />
+      <xsd:element name="guest" type="t_guest" maxOccurs="unbounded" />
+      <xsd:element name="files" type="t_files" />
+    </xsd:sequence>
+    <xsd:attribute name="version" type="xsd:string" use="required" />
+    <xsd:attribute name="cbi" type="xsd:string" use="required" />
+    <xsd:attribute name="image" type="xsd:string" use="required" />
+  </xsd:complexType>
+
+  <xsd:complexType name="t_platform">
+    <xsd:sequence>
+      <xsd:element name="board" type="t_board" minOccurs="0" />
+      <xsd:element name="arch" type="t_arch" minOccurs="0" />
+    </xsd:sequence>
+    <xsd:attribute name="board" type="xsd:string" />
+    <xsd:attribute name="arch" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="t_board">
+    <xsd:sequence>
+      <xsd:element name="device" type="t_device" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="memory" type="t_memory" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_device">
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+    <xsd:attribute name="base" type="number_hex" use="required" />
+    <xsd:attribute name="size" type="number_hex" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_memory">
+    <xsd:sequence>
+      <xsd:element name="memreq" type="t_memreq" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+    <xsd:attribute name="base" type="number_hex" use="required" />
+    <xsd:attribute name="size" type="number_hex" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_arch">
+    <xsd:sequence>
+      <xsd:element name="paging_format" type="t_paging_format" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="protection_format" type="t_protection_format" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_paging_format">
+    <xsd:sequence>
+      <xsd:element name="level" type="t_level" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+    <xsd:attribute name="va_width" type="number" use="required" />
+    <xsd:attribute name="pa_width" type="number" use="required" />
+    <xsd:attribute name="size_estimate" type="number" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_protection_format">
+    <xsd:sequence>
+      <xsd:element name="flag" type="t_flag" minOccurs="1" maxOccurs="unbounded" />
+      <xsd:element name="flaggroup" type="t_flaggroup" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+    <xsd:attribute name="addr_width" type="number" use="required" />
+    <xsd:attribute name="bpe" type="number" use="required" />
+    <xsd:attribute name="flags_base" type="number_hex" use="required" />
+    <xsd:attribute name="min_size_log2" type="number" use="required" />
+    <xsd:attribute name="max_size_log2" type="number" use="required" />
+    <xsd:attribute name="size_estimate" type="number_hex" use="required" />
+    <xsd:attribute name="divisible" type="number" />
+    <xsd:attribute name="natural_align" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="t_level">
+    <xsd:sequence>
+      <xsd:element name="flag" type="t_flag" minOccurs="1" maxOccurs="unbounded" />
+      <xsd:element name="flaggroup" type="t_flaggroup" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="dir_base" type="number_hex" />
+    <xsd:attribute name="leaf_base" type="number_hex" />
+    <xsd:attribute name="shift" type="number" use="required" />
+    <xsd:attribute name="width" type="number" use="required" />
+    <xsd:attribute name="bpe" type="number" use="required" />
+    <xsd:attribute name="align" type="number" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_flag">
+    <xsd:attribute name="name" type="pgprot1" use="required" />
+    <xsd:attribute name="value_set" type="number_hex" use="required" />
+    <xsd:attribute name="value_clear" type="number_hex" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_flaggroup">
+    <xsd:attribute name="group" type="pgprot_list" use="required" />
+    <xsd:attribute name="bits_set" type="number_hex" use="required" />
+    <xsd:attribute name="bits_clear" type="number_hex" use="required" />
+  </xsd:complexType>
+
+  <xsd:complexType name="t_hypervisor">
+    <xsd:sequence>
+      <xsd:element name="feature" type="t_feature" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="memreq" type="t_memreq" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="address_space" type="t_address_space" />
+    </xsd:sequence>
+    <xsd:attribute name="ncpus" type="number" use="required" />
+    <xsd:attribute name="load_base" type="number_hex" use="required" />
+    <xsd:attribute name="exec_base" type="number_hex" use="required" />
+    <xsd:attribute name="entry" type="number_hex" />
+    <xsd:attribute name="ccprefix" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="t_feature">
+    <xsd:attribute name="name" type="xsd:string" use="required" />
+    <xsd:attribute name="value" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_memreq">
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+    <xsd:attribute name="base" type="dict_number_hex" />
+    <xsd:attribute name="size" type="number_hex" use="required" />
+    <xsd:attribute name="align_shift" type="number" />
+    <xsd:attribute name="cpumap" type="list_number" />
+    <xsd:attribute name="flags_demand" type="pgprot_list" use="required" />
+    <xsd:attribute name="flags_prevent" type="pgprot_list" use="required" />
+    <xsd:attribute name="on" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="t_address_space">
+    <xsd:sequence>
+      <xsd:element name="map" type="t_map" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="type" type="xsd:string" use="required" />
+    <xsd:attribute name="format" type="xsd:string" use="required" />
+    <xsd:attribute name="base" type="dict_number_hex" />
+    <xsd:attribute name="href" type="xsd:string" />
+    <xsd:attribute name="size_estimate" type="number_hex" />
+  </xsd:complexType>
+  <xsd:complexType name="t_map">
+    <xsd:attribute name="xref" type="xsd:string" use="required" />
+    <xsd:attribute name="index" type="dict_number_dec" />
+    <xsd:attribute name="base" type="dict_number_hex" />
+    <xsd:attribute name="offset" type="number_hex" />
+    <xsd:attribute name="subsize" type="number_hex" />
+    <xsd:attribute name="cpumap" type="list_number" />
+    <xsd:attribute name="flags" type="pgprot_list" />
+    <xsd:attribute name="is_init" type="xsd:string" />
+  </xsd:complexType>
+
+  <xsd:complexType name="t_guest">
+    <xsd:sequence>
+      <xsd:element name="memreq" type="t_memreq" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="vdev" type="t_vdev" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="address_space" type="t_address_space" />
+      <xsd:element name="init" type="t_init" />
+      <xsd:element name="entry" type="t_entry" />
+      <xsd:element name="sched" type="t_sched" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+    <xsd:attribute name="ncpus" type="number" use="required" />
+    <xsd:attribute name="cpumap" type="list_number" />
+  </xsd:complexType>
+  <xsd:complexType name="t_vdev">
+    <xsd:sequence>
+      <xsd:element name="param" type="t_param" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="value" type="t_value" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="emulate" type="t_emulate" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+    <xsd:attribute name="type" type="xsd:string" use="required" />
+    <xsd:attribute name="frontend" type="xsd:string" />
+    <xsd:attribute name="master" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="t_param">
+    <xsd:attribute name="type" type="xsd:string" use="required" />
+    <xsd:attribute name="xref" type="xsd:string" />
+    <xsd:attribute name="value" type="xsd:string" />
+  </xsd:complexType>
+  <xsd:complexType name="t_value">
+    <xsd:attribute name="type" type="xsd:string" use="required" />
+    <xsd:attribute name="offset" type="number_hex" />
+    <xsd:attribute name="value" type="number_hex" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_emulate">
+    <xsd:attribute name="base" type="number_hex" use="required" />
+    <xsd:attribute name="size" type="number_hex" use="required" />
+    <xsd:attribute name="offset" type="number_hex" />
+  </xsd:complexType>
+  <xsd:complexType name="t_sched">
+    <xsd:attribute name="class" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_entry">
+    <xsd:attribute name="bp_xref" type="xsd:string" use="required" />
+    <xsd:attribute name="bp_offset" type="number_hex" use="required" />
+    <xsd:attribute name="ap_xref" type="xsd:string" />
+    <xsd:attribute name="ap_offset" type="number_hex" />
+  </xsd:complexType>
+  <xsd:complexType name="t_init">
+    <xsd:sequence>
+      <xsd:element name="copy" type="t_copy" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="irq" type="t_irq" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="cap" type="t_cap" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+    <xsd:attribute name="arch_page" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_copy">
+    <xsd:attribute name="xref" type="xsd:string" use="required" />
+    <xsd:attribute name="dref" type="xsd:string" use="required" />
+    <xsd:attribute name="offset" type="number_hex" />
+  </xsd:complexType>
+  <xsd:complexType name="t_irq">
+    <xsd:attribute name="vector" type="number_hex" use="required" />
+    <xsd:attribute name="handler" type="xsd:string" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="t_cap">
+    <xsd:attribute name="type" type="xsd:string" use="required" />
+    <xsd:attribute name="target_xref" type="xsd:string" use="required" />
+    <xsd:attribute name="param" type="number_hex" />
+  </xsd:complexType>
+
+  <xsd:complexType name="t_files">
+    <xsd:sequence>
+      <xsd:element name="file" type="t_file" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="t_file">
+    <xsd:attribute name="id" type="xsd:string" use="required" />
+    <xsd:attribute name="href" type="xsd:string" use="required" />
+    <xsd:attribute name="offset" type="number_hex" />
+    <xsd:attribute name="size" type="number_hex" />
+  </xsd:complexType>
+
+  <xsd:simpleType name="number_hex">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="0x[0-9a-fA-F]+" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="number">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="(0x[0-9a-fA-F]+)|([0-9]+)" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="pgprot1">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[rwxgdus]" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="pgprot_list">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="r?w?x?g?d?u?s?" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="list_number">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="(\*)|(\[[0-9]+(,[0-9]+)*\])" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="dict_number_hex">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="(0x[0-9a-fA-F]+)|(\[-?[0-9]+\]=0x[0-9a-fA-F]+(;\[-?[0-9]+\]=0x[0-9a-fA-F]+)*)" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="dict_number_dec">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="([0-9]+)|(\[-?[0-9]+\]=[0-9]+(;\[-?[0-9]+\]=[0-9]+)*)" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

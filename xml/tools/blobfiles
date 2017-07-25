@@ -1,0 +1,20 @@
+#!/bin/sh
+
+O="$1"
+
+if ! test -s tools/xmlq; then
+	exit 1
+fi
+
+NFILES=$(tools/xmlq -s0 -o"$O" /scenario/files:\#file)
+
+if [ -z "$NFILES" ]; then
+	echo "xml error"
+	exit 1
+fi
+
+for N in $(seq 0 $(expr $NFILES - 1) ); do
+	tools/xmlq -s0 -o"$O" /scenario/files/file[$N]:href
+done
+
+exit 0

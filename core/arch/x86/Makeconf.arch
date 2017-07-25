@@ -1,0 +1,29 @@
+ifeq ($(FEATURE_ARCH_WIDTH),64)
+WORDSIZE := 64
+ARCH_CFLAGS := -m64 -mcmodel=kernel
+WIDTH_INFIX := .64
+else
+WORDSIZE := 32
+ARCH_CFLAGS := -m32 -mregparm=3 -Wl,-m,elf_i386
+WIDTH_INFIX := .32
+endif
+
+ifneq ($(FEATURE_VIRT_TYPE_VMX),)
+VIRT_INFIX := .vmx
+endif
+ifneq ($(FEATURE_VIRT_TYPE_SVM),)
+VIRT_INFIX := .svm
+endif
+
+ARCH_SSRC := cpu_ops$(WIDTH_INFIX).S fpu_support$(WIDTH_INFIX).S
+ARCH_SSRC += init$(WIDTH_INFIX).S lock$(WIDTH_INFIX).S
+
+ARCH_CSRC := virt_setup$(VIRT_INFIX).c exceptions.c
+#ifeq ($(EMULATE_VTLB),yes)
+ARCH_CSRC += emulate/vtlb-pager.c emulate/vtlb-walker.c
+#endif
+ARCH_CSRC += emulate/instructions.c
+ARCH_SSRC += cpu_state.S
+
+ARCH_CSRC += vm$(VIRT_INFIX).c
+ARCH_SSRC += upcall$(WIDTH_INFIX)$(VIRT_INFIX).S

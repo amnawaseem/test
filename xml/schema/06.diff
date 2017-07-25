@@ -1,0 +1,11 @@
+--- schema/05.xsd	2017-06-10 04:18:08.985009532 +0200
++++ schema/06.xsd	2017-06-10 23:56:55.850888927 +0200
+@@ -127,7 +127,7 @@
+     </xsd:sequence>
+     <xsd:attribute name="type" type="xsd:string" use="required" />
+     <xsd:attribute name="format" type="xsd:string" use="required" />
+-    <xsd:attribute name="base" type="dict_number_hex" />
++    <xsd:attribute name="base" type="dict_number_hex" use="required" />
+     <xsd:attribute name="href" type="xsd:string" />
+     <xsd:attribute name="size_estimate" type="number_hex" />
+   </xsd:complexType>

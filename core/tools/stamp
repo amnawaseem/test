@@ -1,0 +1,36 @@
+#!/bin/sh
+
+TARGET_PREFIX="$1"
+
+GCC_VERSION=$(${TARGET_PREFIX}gcc -### 2>&1 | tail -1 | sed -e 's/gcc version //' -e 's/ .*//')
+BINUTILS_VERSION=$(${TARGET_PREFIX}ld --version 2>&1 | head -1 | grep -o '[0-9.]*')
+
+GIT_REVISION=$(git rev-parse --short HEAD)
+
+if git status --porcelain | grep -q "^.M"; then
+	GIT_REVISION="${GIT_REVISION}+"
+fi
+
+TIME_COMPILE=$(date +"%Y/%m/%d %H:%M:%S")
+
+cat - <<EOSTAMP
+.section .rodata, "a"
+
+.global phidias_buildstamp_git_revision
+phidias_buildstamp_git_revision:
+	.asciz	"$GIT_REVISION"
+
+.global phidias_buildstamp_time_compile
+phidias_buildstamp_time_compile:
+	.asciz	"$TIME_COMPILE"
+
+.global	binutils_version
+binutils_version:
+	.asciz	"$BINUTILS_VERSION"
+
+.global	gcc_version
+gcc_version:
+	.asciz	"$GCC_VERSION"
+EOSTAMP
+
+exit 0

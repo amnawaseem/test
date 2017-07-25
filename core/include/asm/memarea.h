@@ -1,0 +1,61 @@
+#ifndef	_PHIDIAS_ASM_MEMAREA_H_
+#define	_PHIDIAS_ASM_MEMAREA_H_
+
+#define	MEMAREA_CORE_RX		0
+#define	MEMAREA_CORE_R		1
+#define	MEMAREA_CORE_RW		2
+#define	MEMAREA_CORE_RWS	3
+#define	MEMAREA_CORE_RWT	4
+#define	MEMAREA_PAGETABLES	5
+#define	MEMAREA_FILES		6
+#define	MEMAREA_STACK		7
+
+#define	MEMAREA_CONFIG_R	8
+#define	MEMAREA_CONFIG_RW	9
+#define	MEMAREA_CONFIG_RWS	10
+#define	MEMAREA_CONFIG_RWT	11
+#define	MEMAREA_XCORE		12
+#define	MEMAREA_TRACE		13
+
+/* Main Debugging UART */
+#define	MEMAREA_SERIAL		16
+
+/* ARM Main IRQ Controller */
+#define	MEMAREA_IRQC		17
+
+/* ARM Cortex-A9 (includes IRQ Controller) */
+#define	MEMAREA_MPCORE		17
+
+/* Versatile */
+#define	MEMAREA_CS7A		24
+
+/* Raspberry Pi 2 */
+#define	MEMAREA_MBOX		24
+
+/* HiKey */
+#define	MEMAREA_GPIO03		24
+#define	MEMAREA_GPIO4J		25
+#define	MEMAREA_TIMERS		26
+#define	MEMAREA_THERMAL		27
+
+#define	MEMAREA_CATCHALL	31
+
+/* x86 PC */
+#define	MEMAREA_LAPIC		24
+#define	MEMAREA_IOAPIC		25
+#define	MEMAREA_VMCX		28
+
+/* PIC32MZEFH */
+#define	MEMAREA_IRQ_PIC32	24
+#define	MEMAREA_TIMER_PIC32	25
+
+/* Flag bits */
+#define	MEMAREA_FLAG_R		0x00000001
+#define	MEMAREA_FLAG_W		0x00000002
+#define	MEMAREA_FLAG_X		0x00000004
+#define	MEMAREA_FLAG_G		0x00000010
+#define	MEMAREA_FLAG_D		0x00000100
+#define	MEMAREA_FLAG_U		0x00001000
+#define	MEMAREA_FLAG_S		0x00010000
+
+#endif

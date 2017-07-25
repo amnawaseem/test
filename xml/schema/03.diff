@@ -1,0 +1,11 @@
+--- schema/02.xsd	2017-06-10 04:13:41.133018987 +0200
++++ schema/03.xsd	2017-06-10 04:14:32.581017171 +0200
+@@ -104,7 +104,7 @@
+     <xsd:attribute name="ncpus" type="number" use="required" />
+     <xsd:attribute name="load_base" type="number_hex" use="required" />
+     <xsd:attribute name="exec_base" type="number_hex" use="required" />
+-    <xsd:attribute name="entry" type="number_hex" />
++    <xsd:attribute name="entry" type="number_hex" use="required" />
+     <xsd:attribute name="ccprefix" type="xsd:string" />
+   </xsd:complexType>
+   <xsd:complexType name="t_feature">

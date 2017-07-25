@@ -1,0 +1,21 @@
+_gen_*
+*.o
+*.a
+include/dtd
+tools/xmlq
+go
+send
+# XML4.1 tools
+/precompilation*
+/expand
+/reparent
+/generate_config*
+/measure
+/layout_memory
+/layout_map
+/pagetables
+/combine
+# XML4.2 tools
+/layouter
+/schema/0[123456].xsd
+.vim_project

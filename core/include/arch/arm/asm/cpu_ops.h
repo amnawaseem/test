@@ -1,0 +1,27 @@
+#ifndef	_PHIDIAS_ARCH_ARM_ASM_CPU_OPS_H_
+#define	_PHIDIAS_ARCH_ARM_ASM_CPU_OPS_H_
+
+# define		PSR_MODEMASK		0x1f
+# define		PSR_MODE_USER		0x10
+# define		PSR_MODE_FASTIRQ	0x11
+# define		PSR_MODE_INTERRUPT	0x12
+# define		PSR_MODE_SUPERVISOR	0x13
+# define		PSR_MODE_MONITOR	0x16
+# define		PSR_MODE_ABORT		0x17
+# define		PSR_MODE_HYPERVISOR	0x1a
+# define		PSR_MODE_UNDEFINED	0x1b
+# define		PSR_MODE_SYSTEM		0x1f
+
+# define		PSR_THUMB		0x20
+# define		PSR_IRQMASK		0x80
+# define		PSR_FIQMASK		0x100
+
+# define		VECTOROFFSET_UND	0x04
+# define		VECTOROFFSET_SVC	0x08
+# define		VECTOROFFSET_PAB	0x0c
+# define		VECTOROFFSET_DAB	0x10
+# define		VECTOROFFSET_IRQ	0x18
+
+# define		TLB_ALL_ADDRESSES	~0U
+
+#endif

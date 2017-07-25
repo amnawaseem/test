@@ -1,0 +1,22 @@
+--- schema/00.xsd	2017-06-04 02:11:20.434587847 +0200
++++ schema/01.xsd	2017-06-04 02:12:02.698586355 +0200
+@@ -16,8 +16,8 @@
+ 
+   <xsd:complexType name="t_platform">
+     <xsd:sequence>
+-      <xsd:element name="board" type="t_board" minOccurs="0" />
+-      <xsd:element name="arch" type="t_arch" minOccurs="0" />
++      <xsd:element name="board" type="t_board" />
++      <xsd:element name="arch" type="t_arch" />
+     </xsd:sequence>
+     <xsd:attribute name="board" type="xsd:string" />
+     <xsd:attribute name="arch" type="xsd:string" />
+@@ -154,7 +154,7 @@
+     </xsd:sequence>
+     <xsd:attribute name="id" type="xsd:string" use="required" />
+     <xsd:attribute name="ncpus" type="number" use="required" />
+-    <xsd:attribute name="cpumap" type="list_number" />
++    <xsd:attribute name="cpumap" type="list_number" use="required" />
+   </xsd:complexType>
+   <xsd:complexType name="t_vdev">
+     <xsd:sequence>

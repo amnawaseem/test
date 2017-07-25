@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arch id="x86">
+  <!-- no NX for legacy x86 paging -->
+  <paging_format id="x86:legacy" va_width="32" pa_width="32" size_estimate="0x10000">
+    <level dir_base="0x007" leaf_base="0x081" shift="22" width="10" bpe="4" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+      <flag name="w" value_set="0x2" value_clear="0x0" />
+      <flag name="x" value_set="0x0" value_clear="0x0" />
+      <flag name="g" value_set="0x100" value_clear="0x0" />
+      <flag name="d" value_set="0x18" value_clear="0x0" />
+      <flag name="u" value_set="0x4" value_clear="0x0" />
+      <flag name="s" value_set="0x800" value_clear="0x0" />
+    </level>
+    <level leaf_base="0x001" shift="12" width="10" bpe="4" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+      <flag name="w" value_set="0x2" value_clear="0x0" />
+      <flag name="x" value_set="0x0" value_clear="0x0" />
+      <flag name="g" value_set="0x100" value_clear="0x0" />
+      <flag name="d" value_set="0x18" value_clear="0x0" />
+      <flag name="u" value_set="0x4" value_clear="0x0" />
+      <flag name="s" value_set="0x800" value_clear="0x0" />
+    </level>
+  </paging_format>
+  <paging_format id="x86:long" va_width="64" pa_width="64" size_estimate="0x20000">
+    <level dir_base="0x007" shift="39" width="9" bpe="8" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+    </level>
+    <level dir_base="0x007" leaf_base="0x081" shift="30" width="9" bpe="8" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+      <flag name="w" value_set="0x2" value_clear="0x0" />
+      <flag name="x" value_set="0x0" value_clear="0x8000000000000000" />
+      <flag name="g" value_set="0x100" value_clear="0x0" />
+      <flag name="d" value_set="0x18" value_clear="0x0" />
+      <flag name="u" value_set="0x4" value_clear="0x0" />
+      <flag name="s" value_set="0x0" value_clear="0x0" />
+    </level>
+    <level dir_base="0x007" leaf_base="0x081" shift="21" width="9" bpe="8" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+      <flag name="w" value_set="0x2" value_clear="0x0" />
+      <flag name="x" value_set="0x0" value_clear="0x8000000000000000" />
+      <flag name="g" value_set="0x100" value_clear="0x0" />
+      <flag name="d" value_set="0x18" value_clear="0x0" />
+      <flag name="u" value_set="0x4" value_clear="0x0" />
+      <flag name="s" value_set="0x0" value_clear="0x0" />
+    </level>
+    <level leaf_base="0x001" shift="12" width="9" bpe="8" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+      <flag name="w" value_set="0x2" value_clear="0x0" />
+      <flag name="x" value_set="0x0" value_clear="0x8000000000000000" />
+      <flag name="g" value_set="0x100" value_clear="0x0" />
+      <flag name="d" value_set="0x18" value_clear="0x0" />
+      <flag name="u" value_set="0x4" value_clear="0x0" />
+      <flag name="s" value_set="0x0" value_clear="0x0" />
+    </level>
+  </paging_format>
+  <paging_format id="x86:ept" va_width="64" pa_width="64" size_estimate="0x20000">
+    <level dir_base="0x007" shift="39" width="9" bpe="8" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+    </level>
+    <level dir_base="0x007" leaf_base="0x081" shift="30" width="9" bpe="8" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+      <flag name="w" value_set="0x2" value_clear="0x0" />
+      <flag name="x" value_set="0x4" value_clear="0x0" />
+      <flag name="g" value_set="0x0" value_clear="0x0" />
+      <flag name="d" value_set="0x0" value_clear="0x30" />
+      <flag name="u" value_set="0x0" value_clear="0x0" />
+      <flag name="s" value_set="0x0" value_clear="0x0" />
+    </level>
+    <level dir_base="0x007" leaf_base="0x081" shift="21" width="9" bpe="8" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+      <flag name="w" value_set="0x2" value_clear="0x0" />
+      <flag name="x" value_set="0x4" value_clear="0x0" />
+      <flag name="g" value_set="0x0" value_clear="0x0" />
+      <flag name="d" value_set="0x0" value_clear="0x30" />
+      <flag name="u" value_set="0x0" value_clear="0x0" />
+      <flag name="s" value_set="0x0" value_clear="0x0" />
+    </level>
+    <level leaf_base="0x001" shift="12" width="9" bpe="8" align="12">
+      <flag name="r" value_set="0x0" value_clear="0x0" />
+      <flag name="w" value_set="0x2" value_clear="0x0" />
+      <flag name="x" value_set="0x4" value_clear="0x0" />
+      <flag name="g" value_set="0x0" value_clear="0x0" />
+      <flag name="d" value_set="0x0" value_clear="0x30" />
+      <flag name="u" value_set="0x0" value_clear="0x0" />
+      <flag name="s" value_set="0x0" value_clear="0x0" />
+    </level>
+  </paging_format>
+</arch>
